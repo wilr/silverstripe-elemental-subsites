@@ -2,7 +2,7 @@
 	"name": "dnadesign/silverstripe-elemental-subsites",
 	"description": "Adds subsite support to elements",
 	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "element", "subsites"],
+	"keywords": ["silverstripe", "element", "elemental", "content blocks", "subsites"],
 	"license": "BSD-3-Clause",
 	"authors": [{
 		"name": "John Milmine",
