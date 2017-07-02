@@ -3,9 +3,9 @@
 This module adds subsite support for elemental
 
 ````
-	ElementPage:
-	  extensions:
-		- 'ElementalSubsitePageExtension'
+    ElementPage:
+      extensions:
+        - 'ElementalSubsitePageExtension'
 
     BaseElement:
       extensions:
