@@ -3,40 +3,41 @@
 namespace DNADesign\ElementalSubsites\Extensions;
 
 use DNADesign\Elemental\Models\BaseElement;
-use DNADesign\Elemental\Models\ElementalArea;
-
-use SilverStripe\ORM\DataExtension;
-use SilverStripe\ORM\Queries\SQLSelect;
-use SilverStripe\ORM\DataQuery;
 use SilverStripe\Forms\FieldList;
+use SilverStripe\Forms\HiddenField;
+use SilverStripe\ORM\DataExtension;
+use SilverStripe\ORM\DataObject;
+use SilverStripe\ORM\DataQuery;
+use SilverStripe\ORM\Queries\SQLSelect;
+use SilverStripe\Subsites\Model\Subsite;
+use SilverStripe\Subsites\State\SubsiteState;
 
 /**
- * @package elemental
- *
- * Make elements compatibale with subsites
+ * Make elements compatible with subsites
  * Apply this extension to BaseElement
  */
-class ElementSubsiteExtension extends DataExtension
+class ElementalSubsiteExtension extends DataExtension
 {
+    private static $has_one = [
+        'Subsite' => Subsite::class,
+    ];
 
-    private static $has_one = array(
-        'Subsite' => Subsite::class
-    );
-
-    public function updateCMSFields(FieldList $fields) {
-
-        // add SubsiteID if Subsites is installed andf Elemental has a subsite
-        if(class_exists('Subsite')) {
-            $fields->push(new HiddenField('SubsiteID', null, Subsite::currentSubsiteID()));
+    public function updateCMSFields(FieldList $fields)
+    {
+        // add SubsiteID if Subsites is installed and Elemental has a subsite
+        if (class_exists(Subsite::class)) {
+            $fields->push(
+                HiddenField::create('SubsiteID', null, SubsiteState::singleton()->getSubsiteId())
+            );
         }
     }
 
     /**
      * Update any requests for elements to limit the results to the current site
      */
-    public function augmentSQL(SQLSelect $query, DataQuery $dataQuery = NULL) {
-
-        if(!class_exists('Subsite')) {
+    public function augmentSQL(SQLSelect $query, DataQuery $dataQuery = null)
+    {
+        if (!class_exists(Subsite::class)) {
             return;
         }
 
@@ -55,19 +56,19 @@ class ElementSubsiteExtension extends DataExtension
         if (Subsite::$force_subsite) {
             $subsiteID = Subsite::$force_subsite;
         } else {
-            $subsiteID = (int)Subsite::currentSubsiteID();
+            $subsiteID = (int) SubsiteState::singleton()->getSubsiteId();
         }
+
+        // Get the base table name
+        $elementTableName = DataObject::getSchema()->baseDataTable(BaseElement::class);
 
         // The foreach is an ugly way of getting the first key :-)
         foreach ($query->getFrom() as $tableName => $info) {
             // The tableName should be Element or Element_Live...
-            if(strpos($tableName, 'Element') !== false) {
+            if (substr($tableName, 0, strlen($elementTableName)) === $elementTableName) {
                 $query->addWhere("\"$tableName\".\"SubsiteID\" IN ($subsiteID)");
                 break;
             }
         }
     }
-
 }
-
-
