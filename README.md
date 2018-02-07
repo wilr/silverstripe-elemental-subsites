@@ -10,5 +10,5 @@ ElementPage:
 
 DNADesign\Elemental\Models\BaseElement:
   extensions:
-    - DNADesign\ElementalSubsites\Extensions\ElementSubsiteExtension
+    - DNADesign\ElementalSubsites\Extensions\ElementalSubsiteExtension
 ```
