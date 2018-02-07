@@ -1,14 +1,14 @@
 # SilverStripe Elemental Subsites
 
-This module adds subsite support for elemental
+This module adds [subsite](https://github.com/silverstripe/silverstripe-subsites) support for 
+[elemental](https://github.com/dnadesign/silverstripe-elemental).
 
-````
-    ElementPage:
-      extensions:
-        - 'ElementalSubsitePageExtension'
+```yaml
+ElementPage:
+  extensions:
+    - DNADesign\ElementalSubsites\Extensions\ElementalSubsitePageExtension
 
-    BaseElement:
-      extensions:
-        - 'ElementSubsiteExtension'
-
-````
+DNADesign\Elemental\Models\BaseElement:
+  extensions:
+    - DNADesign\ElementalSubsites\Extensions\ElementSubsiteExtension
+```
