@@ -1,20 +1,22 @@
 {
-	"name": "dnadesign/silverstripe-elemental-subsites",
-	"description": "Adds subsite support to elements",
-	"type": "silverstripe-module",
-	"keywords": ["silverstripe", "element", "elemental", "content blocks", "subsites"],
-	"license": "BSD-3-Clause",
-	"authors": [{
-		"name": "John Milmine",
-		"email": "john.milmine@dna.co.nz"
-	}],
+    "name": "dnadesign/silverstripe-elemental-subsites",
+    "description": "Adds subsite support to elements",
+    "type": "silverstripe-vendormodule",
+    "keywords": ["silverstripe", "element", "elemental", "content blocks", "subsites"],
+    "license": "BSD-3-Clause",
+    "authors": [{
+        "name": "John Milmine",
+        "email": "john.milmine@dna.co.nz"
+    }],
+    "require": {
+        "dnadesign/silverstripe-elemental": "2.x-dev",
+        "silverstripe/subsites": "2.0.x-dev"
+    },
+    "extra": {
+        "branch-alias": {
+			"dev-master": "1.x-dev"
+		}
+    },
 	"minimum-stability": "dev",
-	"prefer-stable": true,
-	"require": {
-		"dnadesign/silverstripe-elemental": "dev-master",
-		"silverstripe/subsites": "dev-master"
-	},
-	"extra": {
-		"installer-name": "elemental-subsites"
-	}
+	"prefer-stable": true
 }
