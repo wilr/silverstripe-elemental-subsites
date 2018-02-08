@@ -34,7 +34,14 @@ class ElementalSubsitePageExtension extends DataExtension
             $duplicateElement = $originalElement->duplicate(true);
 
             // manually set the ParentID of each element, so we don't get versioning issues
-            DB::query(sprintf("UPDATE Element SET ParentID = %d WHERE ID = %d", $duplicateElementalArea->ID, $duplicateElement->ID));
+            DB::query(
+                sprintf(
+                    "UPDATE %s SET ParentID = %d WHERE ID = %d",
+                    DataObject::getSchema()->tableName(BaseElement::class),
+                    $duplicateElementalArea->ID,
+                    $duplicateElement->ID
+                )
+            );
         }
     }
 }

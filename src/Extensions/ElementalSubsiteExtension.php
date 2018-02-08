@@ -32,8 +32,12 @@ class ElementalSubsiteExtension extends DataExtension
         }
     }
 
+
     /**
      * Update any requests for elements to limit the results to the current site
+     *
+     * @param SQLSelect $query
+     * @param DataQuery|null $dataQuery
      */
     public function augmentSQL(SQLSelect $query, DataQuery $dataQuery = null)
     {
