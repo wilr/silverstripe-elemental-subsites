@@ -9,14 +9,10 @@
         "email": "john.milmine@dna.co.nz"
     }],
     "require": {
-        "dnadesign/silverstripe-elemental": "^2",
-        "silverstripe/subsites": "^2"
+        "dnadesign/silverstripe-elemental": "^3.0",
+        "silverstripe/subsites": "^2.0"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "2.0.x-dev"
-        }
-    },
+    "extra": [],
     "minimum-stability": "dev",
     "prefer-stable": true
 }
