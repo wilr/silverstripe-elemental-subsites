@@ -12,7 +12,11 @@
         "dnadesign/silverstripe-elemental": "^3.0",
         "silverstripe/subsites": "^2.0"
     },
-    "extra": [],
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
