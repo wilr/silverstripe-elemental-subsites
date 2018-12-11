@@ -32,6 +32,17 @@ class ElementalSubsiteExtension extends DataExtension
         }
     }
 
+    /**
+     * Ensure the new block inherits the current subsite id
+     *
+     * @return void
+     */
+    public function onBeforeWrite()
+    {
+        if (class_exists(Subsite::class)) {
+            $this->owner->SubsiteID = SubsiteState::singleton()->getSubsiteId();
+        }
+    }
 
     /**
      * Update any requests for elements to limit the results to the current site
