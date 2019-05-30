@@ -8,12 +8,15 @@ use Page;
 use SilverStripe\ORM\DataExtension;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use SilverStripe\Subsites\Model\Subsite;
 
 /**
  * @package elemental
  */
 class ElementalSubsitePageExtension extends DataExtension
 {
+    protected $original_subsite_filter_state;
+
     /**
      * If the page is duplicated across subsites, copy the elements across too.
      *
@@ -44,5 +47,34 @@ class ElementalSubsitePageExtension extends DataExtension
                 )
             );
         }
+    }
+
+    /**
+     * Extension hook {@see ElementalAreasExtension::requireDefaultRecords}
+     *
+     * Sets Subsite::$disable_subsite_filter to true allowing ElementalAreas
+     * to be created for each Subsite page.
+     *
+     * Sets $original_subsite_filter_state to the $disable_subsite_filter
+     * current state so we can switch back to it after we are done with
+     * creating the ElementalAreas
+     *
+     * @return void
+     */
+    public function onBeforeElementalRecords() {
+        $this->original_subsite_filter_state = Subsite::$disable_subsite_filter;
+        Subsite::disable_subsite_filter();
+    }
+
+    /**
+     * Extension hook {@see ElementalAreasExtension::requireDefaultRecords}
+     *
+     * Sets Subsite::$disable_subsite_filter to it's original
+     * state with $original_subsite_filter_state
+     *
+     * @return void
+     */
+    public function onAfterElementalRecords() {
+        Subsite::disable_subsite_filter($this->original_subsite_filter_state);
     }
 }
