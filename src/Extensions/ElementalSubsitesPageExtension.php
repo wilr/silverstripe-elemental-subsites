@@ -61,7 +61,8 @@ class ElementalSubsitePageExtension extends DataExtension
      *
      * @return void
      */
-    public function onBeforeElementalRecords() {
+    public function onBeforeElementalRecords()
+    {
         $this->original_subsite_filter_state = Subsite::$disable_subsite_filter;
         Subsite::disable_subsite_filter();
     }
@@ -74,7 +75,8 @@ class ElementalSubsitePageExtension extends DataExtension
      *
      * @return void
      */
-    public function onAfterElementalRecords() {
+    public function onAfterElementalRecords()
+    {
         Subsite::disable_subsite_filter($this->original_subsite_filter_state);
     }
 }
