@@ -9,7 +9,7 @@
         "email": "john.milmine@dna.co.nz"
     }],
     "require": {
-        "dnadesign/silverstripe-elemental": "^2",
+        "dnadesign/silverstripe-elemental": "^2 || ^3 || ^4",
         "silverstripe/subsites": "^2"
     },
     "extra": {
