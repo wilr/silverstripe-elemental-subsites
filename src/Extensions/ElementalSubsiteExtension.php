@@ -32,6 +32,10 @@ class ElementalSubsiteExtension extends DataExtension
         }
     }
 
+    public function onBeforeWrite()
+    {
+        $this->owner->SubsiteID = SubsiteState::singleton()->getSubsiteId();
+    }
 
     /**
      * Update any requests for elements to limit the results to the current site
